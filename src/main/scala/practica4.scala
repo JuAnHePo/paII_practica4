@@ -16,4 +16,15 @@ package object concurrencia {
       b
       Thread.sleep(t)
   }
+
+  //ejercicio3a
+  def parallel[A,B](a: =>A, b: =>B): (A,B) = {
+    var va: A = null.asInstanceOf[A]
+    var vb: B = null.asInstanceOf[B]
+    val hA = hebra {va = a}
+    val hB = hebra {vb = b}
+    hA.join()
+    hB.join()
+    (va, vb)
+  }
 }
